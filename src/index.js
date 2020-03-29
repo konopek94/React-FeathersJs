@@ -5,9 +5,13 @@ import App from './App';
 import 'fomantic-ui-css/semantic.min.css';
 import './index.css';
 
+import { ContactContextProvider } from './context/contact-context';
+
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <ContactContextProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ContactContextProvider>,
   document.getElementById('root')
 );
