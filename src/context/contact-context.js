@@ -28,6 +28,27 @@ function reducer(state, action) {
         contact: {},
       };
     }
+    case 'FETCH_CONTACT': {
+      return {
+        ...state,
+        contact: action.payload,
+        message: {},
+      };
+    }
+    case 'UPDATE_CONTACT': {
+      const contact = action.payload;
+      return {
+        ...state,
+        contacts: state.contacts.map(item => {
+          return contact._id === item._id ? contact : item
+        }),
+        message: {
+          type: 'success',
+          title: 'Update Successful',
+          content: `Contact "${contact.email}" has been updated!`,
+        },
+      };
+    }
     default:
       throw new Error();
   }
