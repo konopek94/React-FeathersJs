@@ -10,19 +10,30 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-  case 'FETCH_CONTACTS': {
-    return {
-      ...state,
-      contacts: action.payload,
-      contact: {},
-    };
-  }
-  default:
-    throw new Error();
+    case 'CREATE_CONTACT': {
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload],
+        message: {
+          type: 'success',
+          title: 'Success',
+          content: 'New contact created',
+        },
+      };
+    }
+    case 'FETCH_CONTACTS': {
+      return {
+        ...state,
+        contacts: action.payload,
+        contact: {},
+      };
+    }
+    default:
+      throw new Error();
   }
 }
 
-export const ContactContextProvider = props => {
+export const ContactContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { children } = props;
 
