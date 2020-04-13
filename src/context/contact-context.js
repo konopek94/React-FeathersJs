@@ -49,6 +49,18 @@ function reducer(state, action) {
         },
       };
     }
+    case 'DELETE_CONTACT': {
+      const contact = action.payload
+      return {
+        ...state,
+        contacts: state.contacts.filter(item => contact._id !== item._id),
+        message: {
+          type: 'success',
+          title: 'Delete successful',
+          content: `Contact "${contact.email}" has been deleted!`,
+        }
+      }
+    }
     default:
       throw new Error();
   }
